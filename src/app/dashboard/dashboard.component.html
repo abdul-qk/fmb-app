@@ -1,0 +1,112 @@
+<!-- HEADER -->
+<mat-toolbar color="primary">
+  <mat-toolbar-row class="navbar-row">
+    <h1><a style="color: white;" href="#" routerLink="">FMB Dispatch</a></h1>
+    <span class="spacer"></span>
+    <h4><a href="#" routerLink="/reports">Reports</a></h4>
+    <h4><a href="#" routerLink="/tuks">Tuks</a></h4>
+    <div class="my-auto">
+      <mat-form-field style="font-size: 17px;" color="accent" appearance="fill">
+        <mat-label>Select Date</mat-label>
+        <input matInput [matDatepicker]="picker1" (dateChange)="addEvent('change', $event)"
+          [formControl]="serializedDate">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<!-- Tabs Body -->
+<mat-tab-group mat-stretch-tabs class="mat-elevation-z4" animationDuration="0ms">
+  <mat-tab label="{{ tuk.tuk_name }}" *ngFor="let tuk of tukList">
+    <div style="margin-bottom: 80px;" class="container-fluid">
+      <div class="row">
+        <div class="col-md-10 mx-auto">
+          <div class="row">
+            <div class="col-md-6 mx-auto">
+              <form class="sabeel-form d-flex" #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+                <input name="tuk_id" ngModel="{{tuk.tuk_id}}" type="hidden" required #tuk_id="ngModel">
+                <mat-form-field class="full-width sabeel-field text-left">
+                  <mat-label>Sabeel No.</mat-label>
+                  <input style="text-transform:uppercase" matInput placeholder="Ex. A00012" name="debcode"
+                    [(ngModel)]="sabeel.debcode" required class="debcode" tabIndex="-1" autofocus="true">
+                </mat-form-field>
+                <button type="submit" class="sbt-btn my-auto" mat-raised-button color="accent">Submit</button>
+              </form>
+            </div>
+            <div class="col-md-4 mx-auto my-auto text-center">
+              <mat-card style="border: 1px solid #FFD740;">
+                <div class="row">
+                  <div class="d-center col-6 totals">
+                    <h2><b>{{tukScanned}}</b><span> <br> Scanned</span></h2>
+                  </div>
+                  <div class="d-center col-6 totals">
+                    <h2><b>{{tukNotScanned}}</b><span> <br> Not Scanned</span></h2>
+                  </div>
+                </div>
+              </mat-card>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-md-9 mx-auto">
+          <div class="tiffin-scanned">
+            <table datatable [dtOptions]="dtOptions" class="row-border hover">
+              <thead>
+                <tr>
+                  <ng-container>
+                    <th></th>
+                    <th>Sabeel</th>
+                    <th>Full Name</th>
+                    <th>Status</th>
+                    <th></th>
+                  </ng-container>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let scanned of scannedList">
+                  <ng-container *ngIf="scanned.tuk_id == tuk.tuk_id">
+                    <td><img src="https://colombojamaat.org/files/ejamaat_photos/{{scanned.ejamathno}}.jpg"
+                        class="profile-img" alt="" width="50px"></td>
+                    <td>{{ scanned.debcode }}</td>
+                    <td>{{ scanned.debtype }} {{ scanned.debname }}</td>
+                    <td>{{ scanned.reg_status }}</td>
+                    <td>
+                      <button class="delete-btn" (click)="deletePolicy(scanned)">
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                    </td>
+                  </ng-container>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="row">
+        <div class="col-md-10 mx-auto">
+          <div class="row">
+            <div class="col-md-2 col-sm-6 d-center totals">
+              <h2><b>{{scannedList.length}}</b><span> <br> Total Scanned</span></h2>
+            </div>
+            <div class="col-md-2 col-sm-6 d-center totals">
+              <h2><b>{{userList.length}}</b><span> <br> Total Not Scanned</span></h2>
+            </div>
+            <div class="col-md-8 text-right my-auto show-lists">
+              <button mat-flat-button (click)="openDialogNotTakingList(tuk.tuk_id)">Not Taking</button>
+              <button mat-flat-button (click)="openDialogNotScannedList(tuk.tuk_id)">Not Scanned</button>
+              <button id="btnCouter" #namedElement mat-flat-button (click)="updateCount(tuk.tuk_id)">
+                <mat-icon>autorenew</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+</mat-tab-group>

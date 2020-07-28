@@ -1,0 +1,21 @@
+<div class="not-taking">
+  <h2>Tiffin Not Taking</h2>
+  <mat-card class="not-taking-list">
+    <table datatable class="row-border hover">
+      <thead>
+        <tr>
+          <th>Sabeel</th>
+          <th>Full Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let paused of pausedList">
+          <ng-container *ngIf="paused.tuk_id == data.tukid">
+            <td>{{ paused.debcode }}</td>
+            <td>{{ paused.debtype }} {{ paused.debname }}</td>
+          </ng-container>
+        </tr>
+      </tbody>
+    </table>
+  </mat-card>
+</div>

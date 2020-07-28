@@ -1,0 +1,94 @@
+<!-- HEADER -->
+<mat-toolbar color="primary">
+  <mat-toolbar-row class="navbar-row">
+    <h1><a style="color: white;" href="#" routerLink="">FMB Dispatch</a></h1>
+    <span class="spacer"></span>
+    <h4><a href="#" routerLink="/reports">Reports</a></h4>
+    <h4><a href="#" routerLink="/tuks">Tuks</a></h4>
+    <div class="my-auto">
+      <mat-form-field style="font-size: 17px;" color="accent" appearance="fill">
+        <mat-label>Select Date</mat-label>
+        <input matInput [matDatepicker]="picker1" (dateChange)="addEvent('change', $event)"
+          [formControl]="serializedDate">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<!-- BODY -->
+<div class="container tuk-body">
+  <div class="row">
+    <div class="col-6">
+      <h2 class="text-center">Manage Tuks</h2>
+      <table datatable class="row-border hover">
+        <thead>
+          <th>Tuk ID</th>
+          <th>Tuk Name</th>
+          <th></th>
+          <th></th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let tuk of tukList">
+            <td>{{ tuk.tuk_id }}</td>
+            <td>{{ tuk.tuk_name }}</td>
+            <td>
+              <mat-icon>edit</mat-icon>
+            </td>
+            <td>
+              <mat-icon>delete</mat-icon>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-6">
+      <h2 class="text-center">Add Tuk</h2>
+      <form class="tuk-form d-flex" #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+        <table class="mx-auto">
+          <tbody>
+            <tr>
+              <td>
+                <mat-form-field class="example-full-width">
+                  <mat-label>Tuk Name</mat-label>
+                  <input matInput name="tuk_name" placeholder="Ex. NIS" required>
+                </mat-form-field>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <mat-form-field class="example-full-width">
+                  <mat-label>Address</mat-label>
+                  <textarea name="address" matInput placeholder="Ex. 100 Main St"></textarea>
+                </mat-form-field>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <mat-form-field class="example-full-width">
+                  <mat-label>Mobile</mat-label>
+                  <span matPrefix>+94 &nbsp;</span>
+                  <input name="mobile" type="tel" matInput placeholder="555-555-1234">
+                </mat-form-field>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <mat-form-field class="example-full-width">
+                  <mat-label>Email</mat-label>
+                  <input matInput name="email" placeholder="Ex. email@domain.com">
+                </mat-form-field>
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center">
+                <button type="submit" class="sbt-btn my-auto text-center" mat-raised-button color="accent">Submit</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+  </div>
+</div>

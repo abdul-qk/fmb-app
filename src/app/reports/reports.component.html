@@ -1,0 +1,192 @@
+<!-- HEADER -->
+<mat-toolbar color="primary">
+  <mat-toolbar-row class="navbar-row">
+    <h1><a style="color: white;" href="#" routerLink="">FMB Dispatch</a></h1>
+    <span class="spacer"></span>
+    <h4><a href="#" routerLink="/reports">Reports</a></h4>
+    <h4><a href="#" routerLink="/tuks">Tuks</a></h4>
+    <div class="my-auto">
+      <mat-form-field style="font-size: 17px;" color="accent" appearance="fill">
+        <mat-label>Select Date</mat-label>
+        <input matInput [matDatepicker]="picker1" (dateChange)="addEvent('change', $event)"
+          [formControl]="serializedDate">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<!-- BODY -->
+<div class="container-fluid">
+  <div class="row tots justify-content-center">
+    <div class="col-4 totCount">
+      <mat-card>
+        <h1>Total Scanned</h1>
+        <p>{{ scannedListLength }}</p>
+      </mat-card>
+    </div>
+    <div class="col-4 totCount">
+      <mat-card>
+        <h1>Total Not Scanned</h1>
+        <p>{{ userListLength }}</p>
+      </mat-card>
+    </div>
+  </div>
+  <div class="row tukCounts">
+    <div class="col-2">
+      <mat-card class="tukCount">
+        <div class="row">
+          <div class="col-4 my-auto">
+            <mat-icon>thumb_up</mat-icon>
+          </div>
+          <div class="col-8 text-right my-auto">
+            <p>{{ tukOne }} <br><span style="font-size: 8px !important;">SCANNED</span></p>
+          </div>
+        </div>
+        <hr>
+        <h4>HAND</h4>
+      </mat-card>
+    </div>
+    <div class="col-2">
+      <mat-card class="tukCount">
+        <div class="row">
+          <div class="col-4 my-auto">
+            <mat-icon>thumb_up</mat-icon>
+          </div>
+          <div class="col-8 text-right my-auto">
+            <p>{{ tukTwo }} <br><span style="font-size: 8px !important;">SCANNED</span></p>
+          </div>
+        </div>
+        <hr>
+        <h4>HAMZA</h4>
+      </mat-card>
+    </div>
+    <div class="col-2">
+      <mat-card class="tukCount">
+        <div class="row">
+          <div class="col-4 my-auto">
+            <mat-icon>thumb_up</mat-icon>
+          </div>
+          <div class="col-8 text-right my-auto">
+            <p>{{ tukThree }} <br><span style="font-size: 8px !important;">SCANNED</span></p>
+          </div>
+        </div>
+        <hr>
+        <h4>NISFAR</h4>
+      </mat-card>
+    </div>
+    <div class="col-2">
+      <mat-card class="tukCount">
+        <div class="row">
+          <div class="col-4 my-auto">
+            <mat-icon>thumb_up</mat-icon>
+          </div>
+          <div class="col-8 text-right my-auto">
+            <p>{{ tukFour }} <br><span style="font-size: 8px !important;">SCANNED</span></p>
+          </div>
+        </div>
+        <hr>
+        <h4>LIMRI</h4>
+      </mat-card>
+    </div>
+    <div class="col-2">
+      <mat-card class="tukCount">
+        <div class="row">
+          <div class="col-4 my-auto">
+            <mat-icon>thumb_up</mat-icon>
+          </div>
+          <div class="col-8 text-right my-auto">
+            <p>{{ tukFive }} <br><span style="font-size: 8px !important;">SCANNED</span></p>
+          </div>
+        </div>
+        <hr>
+        <h4>SARATH</h4>
+      </mat-card>
+    </div>
+    <div class="col-2">
+      <mat-card class="tukCount">
+        <div class="row">
+          <div class="col-4 my-auto">
+            <mat-icon>thumb_up</mat-icon>
+          </div>
+          <div class="col-8 text-right my-auto">
+            <p>{{ tukSix }} <br><span style="font-size: 8px !important;">SCANNED</span></p>
+          </div>
+        </div>
+        <hr>
+        <h4>ANURA</h4>
+      </mat-card>
+    </div>
+    <div class="col-2">
+      <mat-card class="tukCount">
+        <div class="row">
+          <div class="col-4 my-auto">
+            <mat-icon>thumb_up</mat-icon>
+          </div>
+          <div class="col-8 text-right my-auto">
+            <p>{{ tukSeven }} <br><span style="font-size: 8px !important;">SCANNED</span></p>
+          </div>
+        </div>
+        <hr>
+        <h4>NAJMI</h4>
+      </mat-card>
+    </div>
+    <div class="col-2">
+      <mat-card class="tukCount">
+        <div class="row">
+          <div class="col-4 my-auto">
+            <mat-icon>thumb_up</mat-icon>
+          </div>
+          <div class="col-8 text-right my-auto">
+            <p>{{ tukEight }} <br><span style="font-size: 8px !important;">SCANNED</span></p>
+          </div>
+        </div>
+        <hr>
+        <h4>ATHURU</h4>
+      </mat-card>
+    </div>
+    <div class="col-2">
+      <mat-card class="tukCount">
+        <div class="row">
+          <div class="col-4 my-auto">
+            <mat-icon>thumb_up</mat-icon>
+          </div>
+          <div class="col-8 text-right my-auto">
+            <p>{{ tukNine }} <br><span style="font-size: 8px !important;">SCANNED</span></p>
+          </div>
+        </div>
+        <hr>
+        <h4>BHUS</h4>
+      </mat-card>
+    </div>
+    <div class="col-2">
+      <mat-card class="tukCount">
+        <div class="row">
+          <div class="col-4 my-auto">
+            <mat-icon>thumb_up</mat-icon>
+          </div>
+          <div class="col-8 text-right my-auto">
+            <p>{{ tukTen }} <br><span style="font-size: 8px !important;">SCANNED</span></p>
+          </div>
+        </div>
+        <hr>
+        <h4>YUSUF</h4>
+      </mat-card>
+    </div>
+    <div class="col-2">
+      <mat-card class="tukCount">
+        <div class="row">
+          <div class="col-4 my-auto">
+            <mat-icon>thumb_up</mat-icon>
+          </div>
+          <div class="col-8 text-right my-auto">
+            <p>{{ tukEleven }} <br><span style="font-size: 8px !important;">SCANNED</span></p>
+          </div>
+        </div>
+        <hr>
+        <h4>RAHUMAN</h4>
+      </mat-card>
+    </div>
+  </div>
+</div>

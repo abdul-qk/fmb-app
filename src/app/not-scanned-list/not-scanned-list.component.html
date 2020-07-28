@@ -1,0 +1,23 @@
+<div class="not-scanned">
+  <h2>Tiffin Not Scanned</h2>
+  <mat-card class="not-scanned-list">
+    <table datatable class="row-border hover">
+      <thead>
+        <tr>
+          <th>Sabeel</th>
+          <th>Full Name</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of userList">
+          <ng-container *ngIf="user.tuk_id == data.tukid">
+            <td>{{ user.debcode }}</td>
+            <td>{{ user.debtype }} {{ user.debname }}</td>
+            <td>{{ user.reg_status }}</td>
+          </ng-container>
+        </tr>
+      </tbody>
+    </table>
+  </mat-card>
+</div>

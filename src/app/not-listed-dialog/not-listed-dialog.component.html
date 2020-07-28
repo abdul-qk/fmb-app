@@ -1,0 +1,7 @@
+<h1 mat-dialog-title>Not Listed</h1>
+<div mat-dialog-content>Sabeel No <strong>{{data.sabeelno}}</strong> is not in this list.</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+  <button mat-button mat-dialog-close (click)="changeTemp(data.sabeelno)">Change Temp</button>
+  <button mat-button mat-dialog-close (click)="changePerm(data.sabeelno)">Change Perm</button>
+</div>

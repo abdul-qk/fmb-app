@@ -1,0 +1,6 @@
+<h1 mat-dialog-title>Sabeel Not Registered</h1>
+<div mat-dialog-content>Sabeel No <strong>{{data.sabeelno}}</strong> has not yet been registered.</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+  <button mat-button mat-dialog-close (click)="addAnyway(data.sabeelno)">Add Anyway</button>
+</div>

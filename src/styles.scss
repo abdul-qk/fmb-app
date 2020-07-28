@@ -1,0 +1,127 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap');
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+body {
+  margin: 0;
+  font-family: 'Nunito', 'sans-serif';
+  font-size: 18px;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+h1 {
+  margin-top: 2em;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.sabeel-field {
+  width: 300px;
+  font-size: 30px;
+  padding-top: 1em;
+}
+
+.navbar-row {
+  h4 {
+    margin-right: 2em;
+
+    a {
+      color: white;
+      font-size: 16px;
+    }
+  }
+}
+
+.scanned-list {
+
+  padding-top: 2em;
+  width: 100%;
+  padding-bottom: 3em;
+  overflow: scroll;
+  position: relative;
+
+  li {
+    list-style-type: none;
+  }
+
+  .scanned-person {
+    border: 1px solid black;
+    border-radius: 1em;
+    padding: 1em 2em;
+  }
+}
+
+.not-scanned {
+
+  p {
+    font-size: 10px;
+  }
+}
+
+.not-scanned-list {
+  height: 450px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.tiffin-scanned {
+  mat-card {
+    margin-bottom: 2em;
+  }
+}
+
+.totals {
+  h2 {
+    padding-top: 1em;
+  }
+
+  mat-card {
+    margin-bottom: 1em;
+  }
+}
+
+.final-totals {
+
+  float: right;
+
+  p {
+    font-size: 12px;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-bottom: 0px;
+    line-height: 1.5;
+  }
+}
+
+.not-taking {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

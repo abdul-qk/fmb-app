@@ -1,0 +1,6 @@
+<h1 mat-dialog-title>Already Scanned</h1>
+<div mat-dialog-content>Sabeel No <strong>{{data.sabeel}}</strong> has been already scanned for today.</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+  <button mat-button mat-dialog-close (click)="addAnyway(data.sabeel)">Add Anyway</button>
+</div>
