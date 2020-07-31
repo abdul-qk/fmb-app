@@ -14,7 +14,16 @@ import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 })
 export class TuksComponent implements OnInit {
 
-  constructor(private apiService: ApiService) { }
+  tukForm;
+
+  constructor(private apiService: ApiService, private formBuilder: FormBuilder) {
+    this.tukForm = this.formBuilder.group({
+      tuk_name: '',
+      address: '',
+      email: '',
+      mobile: ''
+    });
+  }
 
   today = Math.floor(new Date().getTime() / 1000.0)
   dateTod = new Date().toISOString()
@@ -41,9 +50,29 @@ export class TuksComponent implements OnInit {
 
   }
 
-  onSubmit(f: NgForm){
-    var formVal = f.value;
-    console.log(formVal.tuk_name);
+  onSubmit(formData) {
+    this.apiService.addTuk(formData).subscribe((tukList: Tuk[]) => {
+      this.tukList = tukList;
+      console.log(this.tukList);
+    })
+
+    this.apiService.readTuks().subscribe((tukList: Tuk[]) => {
+      this.tukList = tukList;
+      console.log(this.tukList);
+    })
+
+    this.tukForm.reset();
+
+    console.log(formData);
+  }
+
+  deleteTuk(tukid) {
+
+    this.apiService.deleteTuk(tukid).subscribe((tukList: Tuk[]) => {
+      this.tukList = tukList;
+      console.log(this.tukList);
+    })
+
   }
 
 }

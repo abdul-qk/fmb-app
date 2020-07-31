@@ -251,10 +251,10 @@ export class DashboardComponent implements OnInit {
     var debcodeUp = formValue.debcode.toUpperCase();
     console.log(debcodeUp);
 
-    var check = this.search(formValue.debcode.toUpperCase(), this.scannedList); //Check for debcode present in the scanned list
-    var pause = this.search(formValue.debcode.toUpperCase(), this.pausedList); //Check for debcode present in the paused list
-    var index = this.search(formValue.debcode.toUpperCase(), this.userList); //Check for debcode present in the registration/not-scanned list
-    var notreg = this.search(formValue.debcode.toUpperCase(), this.notUserList); //Check for debcode present in the registration/not-scanned list
+    var check = this.search(debcodeUp, this.scannedList); //Check for debcode present in the scanned list
+    var pause = this.search(debcodeUp, this.pausedList); //Check for debcode present in the paused list
+    var index = this.search(debcodeUp, this.userList); //Check for debcode present in the registration/not-scanned list
+    var notreg = this.search(debcodeUp, this.notUserList); //Check for debcode present in the registration/not-scanned list
 
     //Checks for scanned list
     if (

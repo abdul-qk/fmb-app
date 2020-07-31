@@ -12,8 +12,8 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
 
-  PHP_API_SERVER = "http://faizulmawaid.lk/dispatch/backend";
-  // PHP_API_SERVER = "http://127.0.0.1:8080";
+  // PHP_API_SERVER = "http://faizulmawaid.lk/dispatch/backend";
+  PHP_API_SERVER = "http://127.0.0.1:8080";
   constructor(private httpClient: HttpClient) { }
 
   readTuks(): Observable<Tuk[]> {
@@ -45,6 +45,24 @@ export class ApiService {
     });
   }
 
+  readPaxRegistered(date): Observable<User[]> {
+    return this.httpClient.get<User[]>(`${this.PHP_API_SERVER}/api/read_pax_reg.php`, {
+      params: {curDate: date}
+    });
+  }
+
+  readPaxUnRegistered(date): Observable<User[]> {
+    return this.httpClient.get<User[]>(`${this.PHP_API_SERVER}/api/read_pax_unreg.php`, {
+      params: {curDate: date}
+    });
+  }
+
+  readPaxRegisteredNT(date): Observable<User[]> {
+    return this.httpClient.get<User[]>(`${this.PHP_API_SERVER}/api/read_pax_reg_nt.php`, {
+      params: {curDate: date}
+    });
+  }
+
   updateScan(scanned) {
     // console.log(scanned);
     return this.httpClient.get(`${this.PHP_API_SERVER}/api/update_scanned.php?tuk_id=` + scanned.tuk_id + `&debcode=` + scanned.debcode + `&reg_status=` + scanned.reg_status);
@@ -53,9 +71,17 @@ export class ApiService {
   updateTuk(scanned) {
     return this.httpClient.get(`${this.PHP_API_SERVER}/api/update_tuk.php?tuk_id=` + scanned.tuk_id + `&debcode=` + scanned.debcode);
   }
+
+  addTuk(tuk) {
+    return this.httpClient.get(`${this.PHP_API_SERVER}/api/new_tuk.php?tuk_name=` + tuk.tuk_name + `&address=` + tuk.address + `&mobile=` + tuk.mobile + `&email=` + tuk.email);
+  }
   
   deletePolicy(id: string){
-    return this.httpClient.delete<User>(`${this.PHP_API_SERVER}/api/delete_scanned.php?scan_id=` + id);
+    return this.httpClient.delete<Scanned>(`${this.PHP_API_SERVER}/api/delete_scanned.php?scan_id=` + id);
+  }
+  
+  deleteTuk(id: number){
+    return this.httpClient.get(`${this.PHP_API_SERVER}/api/delete_tuk.php?tuk_id=` + id);
   }
 
 }

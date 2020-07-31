@@ -5,15 +5,15 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 
 
 /** Database Credentials **/
-define('DB_HOST', 'fmbdb.db.2622337.hostedresource.com');
-define('DB_USER', 'fmbdb');
-define('DB_PASS', 'SHTech2152!');
-define('DB_NAME', 'fmbdb');
-
-// define('DB_HOST', 'localhost');
-// define('DB_USER', 'root');
-// define('DB_PASS', '');
+// define('DB_HOST', 'fmbdb.db.2622337.hostedresource.com');
+// define('DB_USER', 'fmbdb');
+// define('DB_PASS', 'SHTech2152!');
 // define('DB_NAME', 'fmbdb');
+
+define('DB_HOST', 'localhost');
+define('DB_USER', 'root');
+define('DB_PASS', '');
+define('DB_NAME', 'fmbdb');
 
 function connect()
 {
