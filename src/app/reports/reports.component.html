@@ -19,7 +19,35 @@
 
 <!-- BODY -->
 <div class="container-fluid">
-  <h1 style="margin-top: 1em; margin-left: 1em; font-weight: bold;">Tuk Wise Count</h1>
+  <div class="row">
+    <div class="col-12">
+      <h1 class="tukWiseHead"><strong>Summary</strong></h1>
+      <div class="row">
+        <div class="col-md-4 col-sm-6">
+          <mat-card>
+            <h4 style="display: inline;">
+              <strong>
+                Total Count -
+              </strong>
+            </h4>
+            <p style="display: inline;">{{ total }}</p>
+          </mat-card>
+        </div>
+        <div class="col-md-4 col-sm-6">
+          <mat-card>
+            <h4 style="display: inline;">
+              <strong>
+                Friday Count -
+              </strong>
+            </h4>
+            <p style="display: inline;" *ngFor="let item of friCount">{{ item.count }}</p>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr style="margin: 2em 0;">
+  <h1 style="margin-top: 1em; margin-left: 1em;">Tuk Wise Count</h1>
   <div class="row">
     <div class="col-md-4">
       <h3 class="tukWiseHead">Registered</h3>
@@ -33,6 +61,10 @@
             <tr *ngFor="let tuk of tukReg">
               <td>{{ tuk.tuk_name }}</td>
               <td>{{ tuk.count }}</td>
+            </tr>
+            <tr>
+              <td><b>Total</b></td>
+              <td><b>{{tukRegTotal}}</b></td>
             </tr>
           </tbody>
         </table>
@@ -54,6 +86,10 @@
               <td>{{ tuk.tuk_name }}</td>
               <td>{{ tuk.count }}</td>
             </tr>
+            <tr>
+              <td><b>Total</b></td>
+              <td><b>{{tukUnregTotal}}</b></td>
+            </tr>
           </tbody>
         </table>
       </ng-container>
@@ -74,6 +110,10 @@
               <td>{{ tuk.tuk_name }}</td>
               <td>{{ tuk.count }}</td>
             </tr>
+            <tr>
+              <td><b>Total</b></td>
+              <td><b>{{tukRegNTTotal}}</b></td>
+            </tr>
           </tbody>
         </table>
       </ng-container>
@@ -83,7 +123,7 @@
     </div>
   </div>
   <hr style="margin: 2em 0;">
-  <h1 style="margin-top: 1em; margin-left: 1em; font-weight: bold;">Pack Count</h1>
+  <h1 style="margin-top: 1em; margin-left: 1em;">Pack Count</h1>
   <div style="margin-bottom: 3em;" class="row">
     <div class="col-md-4">
       <h3 class="tukWiseHead">Registered</h3>
@@ -98,15 +138,17 @@
               <td>{{ pack.packqty }}</td>
               <td>{{ pack.packqtyCount }}</td>
             </tr>
+            <tr>
+              <td><b>Total</b></td>
+              <td><b>{{paxRegTotal}}</b></td>
+            </tr>
           </tbody>
         </table>
       </ng-container>
       <ng-template #other_content>
         <p style="text-align: center;">No Table Data</p>
       </ng-template>
-    </div>
-    <div class="col-md-4">
-      <h3 class="tukWiseHead">Un-Registered</h3>
+      <h3 class="tukWiseHead mt-4">Un-Registered / Not Taking</h3>
       <ng-container *ngIf="paxReg.length > 0;else other_content">
         <table datatable class="table-count col-md-4">
           <thead>
@@ -118,6 +160,10 @@
               <td>{{ pack.packqty }}</td>
               <td>{{ pack.packqtyCount }}</td>
             </tr>
+            <tr>
+              <td><b>Total</b></td>
+              <td><b>{{paxUnregTotal}}</b></td>
+            </tr>
           </tbody>
         </table>
       </ng-container>
@@ -125,32 +171,27 @@
         <p style="text-align: center;">No Table Data</p>
       </ng-template>
     </div>
-    <div class="col-md-4">
-      <h3 class="tukWiseHead">Miscellaneous</h3>
-      <mat-card>
-        <h4 style="display: inline;">
-          <strong>
-            Friday Count -
-          </strong>
-        </h4>
-        <p style="display: inline;" *ngFor="let item of friCount">{{ item.count }}</p>
-      </mat-card>
+    <div class="col-md-8">
+      <h3 class="tukWiseHead">Anamoly</h3>
       <mat-card style="margin-top: 2em;">
-        <h4 style="display: inline;">
-          <strong>
-            Un-Registered
-          </strong>
-        </h4>
         <table datatable>
           <thead>
+            <th>Tuk Name</th>
             <th>Sabeel</th>
             <th>Name</th>
+            <th>Mobile</th>
+            <th>Pack Qty</th>
+            <th>Status</th>
           </thead>
           <ng-container *ngIf="unreg.length > 0; else other_content4">
             <tbody>
               <tr *ngFor="let unr of unreg">
+                <td>{{ unr.tuk_name }}</td>
                 <td>{{ unr.debcode }}</td>
                 <td>{{ unr.debtype }} {{ unr.debname }}</td>
+                <td>{{ unr.debmob }}</td>
+                <td>{{ unr.packqty }}</td>
+                <td>{{ unr.reg_status }}</td>
               </tr>
             </tbody>
           </ng-container>

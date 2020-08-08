@@ -13,16 +13,18 @@ if (date("l", strtotime($dateformatted)) == "Friday") {
 
 $userlist = [];
 
-$sql = "SELECT t.tuk_name, r.debcode, COUNT(r.debcode) as count, debtype, debname, debmob, packqty 
-        FROM tbl_scan s 
-        LEFT JOIN tbl_tuk t ON t.tuk_id = s.tuk_id 
-        LEFT JOIN tbl_registrations r ON r.tuk_id = s.tuk_id 
-        WHERE s.debcode IN 
-        ( 
-            SELECT r.debcode 
-            FROM tbl_registrations 
-            WHERE confirmed = 0 
-        ) 
+$sql = "SELECT t.tuk_name, s.debcode, debtype, debname, debmob, packqty,
+        CASE
+            WHEN tiffinsts LIKE 'not taking' THEN 'Not Taking'
+            ELSE 'Unregistered'
+        END AS reg_status
+        FROM tbl_scan s
+        LEFT JOIN tbl_tuk t ON t.tuk_id = s.tuk_id
+        LEFT JOIN tbl_registrations r ON r.debcode = s.debcode
+        WHERE s.debcode
+            IN (SELECT debcode
+            FROM tbl_registrations
+            WHERE confirmed = 0 OR tiffinsts NOT LIKE 'taking') 
         AND DATE(scan_time) = '$dateformatted'";
 
 if ($result = mysqli_query($con, $sql)) {
@@ -34,6 +36,8 @@ if ($result = mysqli_query($con, $sql)) {
         $userlist[$i]['debtype']    = $row['debtype'];
         $userlist[$i]['debname']    = $row['debname'];
         $userlist[$i]['packqty']    = $row['packqty'];
+        $userlist[$i]['debmob']     = $row['debmob'];
+        $userlist[$i]['reg_status'] = $row['reg_status'];
         $i++;
     }
 

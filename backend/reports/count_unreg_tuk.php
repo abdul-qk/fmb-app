@@ -13,7 +13,10 @@ if (date("l", strtotime($dateformatted)) == "Friday") {
 
 $userlist = [];
 
-$sql = "SELECT t.tuk_name, COUNT( debcode ) AS count
+// echo $dateformatted;
+// exit();
+
+$sql = "SELECT t.tuk_name, COUNT( s.debcode ) AS count
         FROM tbl_scan s
         LEFT JOIN tbl_tuk t ON t.tuk_id = s.tuk_id
         WHERE s.debcode

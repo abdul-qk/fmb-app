@@ -13,10 +13,17 @@ if (date("l", strtotime($dateformatted)) == "Friday") {
 
 $userlist = [];
 
-$sql = "SELECT packqty, count(packqty) as packqtyCount from tbl_registrations 
-        WHERE tiffinsts LIKE 'UN REGISTERED'
-        AND debcode IN (SELECT debcode FROM tbl_scan WHERE DATE(scan_time) = '$dateformatted') $sql_fri
-        Group by packqty";
+$sql = "SELECT packqty, count(packqty) AS packqtyCount
+        FROM tbl_scan s
+        LEFT JOIN tbl_registrations r ON r.debcode = s.debcode
+        WHERE s.debcode
+        IN (
+            SELECT r.debcode
+            FROM tbl_registrations r
+            WHERE confirmed = 0 OR tiffinsts NOT LIKE 'taking'
+        )
+        AND DATE(scan_time) = '$dateformatted'
+        GROUP BY packqty";
 
 if ($result = mysqli_query($con, $sql)) {
     $i = 0;

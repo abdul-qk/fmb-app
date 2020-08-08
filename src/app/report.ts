@@ -6,4 +6,6 @@ export class Report {
     debname: string;
     debtype: string;
     tuk_name: string;
+    reg_status: string;
+    debmob: number;
 }
