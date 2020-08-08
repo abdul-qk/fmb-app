@@ -19,173 +19,145 @@
 
 <!-- BODY -->
 <div class="container-fluid">
-  <div class="row tots justify-content-center">
-    <div class="col-4 totCount">
-      <mat-card>
-        <h1>Total Scanned</h1>
-        <p>{{ scannedListLength }}</p>
-      </mat-card>
+  <h1 style="margin-top: 1em; margin-left: 1em; font-weight: bold;">Tuk Wise Count</h1>
+  <div class="row">
+    <div class="col-md-4">
+      <h3 class="tukWiseHead">Registered</h3>
+      <ng-container *ngIf="paxReg.length > 0;else other_content">
+        <table datatable class="table-count col-md-4">
+          <thead>
+            <th>Tuk Name</th>
+            <th>Scan Count</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let tuk of tukReg">
+              <td>{{ tuk.tuk_name }}</td>
+              <td>{{ tuk.count }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </ng-container>
+      <ng-template #other_content>
+        <p style="text-align: center;">No Table Data</p>
+      </ng-template>
     </div>
-    <div class="col-4 totCount">
-      <mat-card>
-        <h1>Total Not Scanned</h1>
-        <p>{{ userListLength }}</p>
-      </mat-card>
+    <div class="col-md-4">
+      <h3 class="tukWiseHead">Un-Registered</h3>
+      <ng-container *ngIf="paxReg.length > 0;else other_content">
+        <table datatable class="table-count col-md-4">
+          <thead>
+            <th>Tuk Name</th>
+            <th>Scan Count</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let tuk of tukUnreg">
+              <td>{{ tuk.tuk_name }}</td>
+              <td>{{ tuk.count }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </ng-container>
+      <ng-template #other_content>
+        <p style="text-align: center;">No Table Data</p>
+      </ng-template>
+    </div>
+    <div class="col-md-4">
+      <h3 class="tukWiseHead">Registered & Not Taking</h3>
+      <ng-container *ngIf="paxReg.length > 0;else other_content3">
+        <table datatable class="table-count col-md-4">
+          <thead>
+            <th>Tuk Name</th>
+            <th>Scan Count</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let tuk of tukRegNT">
+              <td>{{ tuk.tuk_name }}</td>
+              <td>{{ tuk.count }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </ng-container>
+      <ng-template #other_content3>
+        <p style="text-align: center;">No Table Data</p>
+      </ng-template>
     </div>
   </div>
-  <div class="row tukCounts">
-    <div class="col-2">
-      <mat-card class="tukCount">
-        <div class="row">
-          <div class="col-4 my-auto">
-            <mat-icon>thumb_up</mat-icon>
-          </div>
-          <div class="col-8 text-right my-auto">
-            <p>{{ tukOne }} <br><span style="font-size: 8px !important;">SCANNED</span></p>
-          </div>
-        </div>
-        <hr>
-        <h4>HAND</h4>
-      </mat-card>
+  <hr style="margin: 2em 0;">
+  <h1 style="margin-top: 1em; margin-left: 1em; font-weight: bold;">Pack Count</h1>
+  <div style="margin-bottom: 3em;" class="row">
+    <div class="col-md-4">
+      <h3 class="tukWiseHead">Registered</h3>
+      <ng-container *ngIf="paxReg.length > 0;else other_content">
+        <table datatable class="table-count col-md-4">
+          <thead>
+            <th>Tuk Name</th>
+            <th>Scan Count</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let pack of paxReg">
+              <td>{{ pack.packqty }}</td>
+              <td>{{ pack.packqtyCount }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </ng-container>
+      <ng-template #other_content>
+        <p style="text-align: center;">No Table Data</p>
+      </ng-template>
     </div>
-    <div class="col-2">
-      <mat-card class="tukCount">
-        <div class="row">
-          <div class="col-4 my-auto">
-            <mat-icon>thumb_up</mat-icon>
-          </div>
-          <div class="col-8 text-right my-auto">
-            <p>{{ tukTwo }} <br><span style="font-size: 8px !important;">SCANNED</span></p>
-          </div>
-        </div>
-        <hr>
-        <h4>HAMZA</h4>
-      </mat-card>
+    <div class="col-md-4">
+      <h3 class="tukWiseHead">Un-Registered</h3>
+      <ng-container *ngIf="paxReg.length > 0;else other_content">
+        <table datatable class="table-count col-md-4">
+          <thead>
+            <th>Tuk Name</th>
+            <th>Scan Count</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let pack of paxUnreg">
+              <td>{{ pack.packqty }}</td>
+              <td>{{ pack.packqtyCount }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </ng-container>
+      <ng-template #other_content>
+        <p style="text-align: center;">No Table Data</p>
+      </ng-template>
     </div>
-    <div class="col-2">
-      <mat-card class="tukCount">
-        <div class="row">
-          <div class="col-4 my-auto">
-            <mat-icon>thumb_up</mat-icon>
-          </div>
-          <div class="col-8 text-right my-auto">
-            <p>{{ tukThree }} <br><span style="font-size: 8px !important;">SCANNED</span></p>
-          </div>
-        </div>
-        <hr>
-        <h4>NISFAR</h4>
+    <div class="col-md-4">
+      <h3 class="tukWiseHead">Miscellaneous</h3>
+      <mat-card>
+        <h4 style="display: inline;">
+          <strong>
+            Friday Count -
+          </strong>
+        </h4>
+        <p style="display: inline;" *ngFor="let item of friCount">{{ item.count }}</p>
       </mat-card>
-    </div>
-    <div class="col-2">
-      <mat-card class="tukCount">
-        <div class="row">
-          <div class="col-4 my-auto">
-            <mat-icon>thumb_up</mat-icon>
-          </div>
-          <div class="col-8 text-right my-auto">
-            <p>{{ tukFour }} <br><span style="font-size: 8px !important;">SCANNED</span></p>
-          </div>
-        </div>
-        <hr>
-        <h4>LIMRI</h4>
-      </mat-card>
-    </div>
-    <div class="col-2">
-      <mat-card class="tukCount">
-        <div class="row">
-          <div class="col-4 my-auto">
-            <mat-icon>thumb_up</mat-icon>
-          </div>
-          <div class="col-8 text-right my-auto">
-            <p>{{ tukFive }} <br><span style="font-size: 8px !important;">SCANNED</span></p>
-          </div>
-        </div>
-        <hr>
-        <h4>SARATH</h4>
-      </mat-card>
-    </div>
-    <div class="col-2">
-      <mat-card class="tukCount">
-        <div class="row">
-          <div class="col-4 my-auto">
-            <mat-icon>thumb_up</mat-icon>
-          </div>
-          <div class="col-8 text-right my-auto">
-            <p>{{ tukSix }} <br><span style="font-size: 8px !important;">SCANNED</span></p>
-          </div>
-        </div>
-        <hr>
-        <h4>ANURA</h4>
-      </mat-card>
-    </div>
-    <div class="col-2">
-      <mat-card class="tukCount">
-        <div class="row">
-          <div class="col-4 my-auto">
-            <mat-icon>thumb_up</mat-icon>
-          </div>
-          <div class="col-8 text-right my-auto">
-            <p>{{ tukSeven }} <br><span style="font-size: 8px !important;">SCANNED</span></p>
-          </div>
-        </div>
-        <hr>
-        <h4>NAJMI</h4>
-      </mat-card>
-    </div>
-    <div class="col-2">
-      <mat-card class="tukCount">
-        <div class="row">
-          <div class="col-4 my-auto">
-            <mat-icon>thumb_up</mat-icon>
-          </div>
-          <div class="col-8 text-right my-auto">
-            <p>{{ tukEight }} <br><span style="font-size: 8px !important;">SCANNED</span></p>
-          </div>
-        </div>
-        <hr>
-        <h4>ATHURU</h4>
-      </mat-card>
-    </div>
-    <div class="col-2">
-      <mat-card class="tukCount">
-        <div class="row">
-          <div class="col-4 my-auto">
-            <mat-icon>thumb_up</mat-icon>
-          </div>
-          <div class="col-8 text-right my-auto">
-            <p>{{ tukNine }} <br><span style="font-size: 8px !important;">SCANNED</span></p>
-          </div>
-        </div>
-        <hr>
-        <h4>BHUS</h4>
-      </mat-card>
-    </div>
-    <div class="col-2">
-      <mat-card class="tukCount">
-        <div class="row">
-          <div class="col-4 my-auto">
-            <mat-icon>thumb_up</mat-icon>
-          </div>
-          <div class="col-8 text-right my-auto">
-            <p>{{ tukTen }} <br><span style="font-size: 8px !important;">SCANNED</span></p>
-          </div>
-        </div>
-        <hr>
-        <h4>YUSUF</h4>
-      </mat-card>
-    </div>
-    <div class="col-2">
-      <mat-card class="tukCount">
-        <div class="row">
-          <div class="col-4 my-auto">
-            <mat-icon>thumb_up</mat-icon>
-          </div>
-          <div class="col-8 text-right my-auto">
-            <p>{{ tukEleven }} <br><span style="font-size: 8px !important;">SCANNED</span></p>
-          </div>
-        </div>
-        <hr>
-        <h4>RAHUMAN</h4>
+      <mat-card style="margin-top: 2em;">
+        <h4 style="display: inline;">
+          <strong>
+            Un-Registered
+          </strong>
+        </h4>
+        <table datatable>
+          <thead>
+            <th>Sabeel</th>
+            <th>Name</th>
+          </thead>
+          <ng-container *ngIf="unreg.length > 0; else other_content4">
+            <tbody>
+              <tr *ngFor="let unr of unreg">
+                <td>{{ unr.debcode }}</td>
+                <td>{{ unr.debtype }} {{ unr.debname }}</td>
+              </tr>
+            </tbody>
+          </ng-container>
+          <ng-template #other_content4>
+            <p>No Data</p>
+          </ng-template>
+        </table>
       </mat-card>
     </div>
   </div>

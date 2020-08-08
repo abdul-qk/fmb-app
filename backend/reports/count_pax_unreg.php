@@ -3,8 +3,8 @@
 /**
  * Returns the list of policies.
  */
-require 'database.php';
-require_once 'date.php';
+require '../api/database.php';
+require_once '../api/date.php';
 
 $sql_fri = "AND tiffinfreq <> 'F'";
 if (date("l", strtotime($dateformatted)) == "Friday") {

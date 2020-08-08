@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Tuk } from '../tuk';
-import { Scanned } from '../scanned';
-import { User } from '../user';
-import { Paused } from '../paused';
+
+import { Report } from '../report';
 import { ApiService } from '../api.service';
+
+
 import { FormControl } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 
@@ -28,166 +28,102 @@ export class ReportsComponent implements OnInit {
 
     this.today = Math.floor(new Date(event.value).getTime() / 1000.0)
 
+    
+
     // API
-    this.apiService.readScanned(this.today).subscribe((scannedList: Scanned[]) => {
-      this.scannedList = scannedList;
-      this.scannedListLength = scannedList.length;
-      this.updateCount(this.scannedList);
-      // console.log(this.scannedList);
+    this.apiService.readFriday(this.today).subscribe((friCount: Report[]) => {
+      this.friCount = friCount;
+      // console.log(this.friCount);
     })
 
-    this.apiService.readRegistrants(this.today).subscribe((userList: User[]) => {
-      this.userList = userList;
-      this.userListLength = userList.length;
-      // console.log(this.userList);
+    this.apiService.readPaxRegistered(this.today).subscribe((paxReg: Report[]) => {
+      this.paxReg = paxReg;
+      // console.log(this.paxReg);
     })
 
-    this.apiService.readPaused(this.today).subscribe((pausedList: Paused[]) => {
-      this.pausedList = pausedList;
-      // console.log(this.pausedList);
+    this.apiService.readPaxUnRegistered(this.today).subscribe((paxUnreg: Report[]) => {
+      this.paxUnreg = paxUnreg;
+      // console.log(this.paxUnreg);
     })
 
-    this.apiService.readNotRegistered(this.today).subscribe((notUserList: User[]) => {
-      this.notUserList = notUserList;
-      // console.log(this.notUserList);
+    this.apiService.readTukRegistered(this.today).subscribe((tukReg: Report[]) => {
+      this.tukReg = tukReg;
+      // console.log(this.tukReg);
     })
+
+    this.apiService.readTukUnregistered(this.today).subscribe((tukUnreg: Report[]) => {
+      this.tukUnreg = tukUnreg;
+      // console.log(this.tukUnreg);
+    })
+
+    this.apiService.readTukRegisteredNT(this.today).subscribe((tukRegNT: Report[]) => {
+      this.tukRegNT = tukRegNT;
+      // console.log(this.tukRegNT);
+    })
+
+    this.apiService.readRegistered(this.today).subscribe((reg: Report[]) => {
+      this.reg = reg;
+      console.log(this.reg);
+    })
+
+    this.apiService.readUnregistered(this.today).subscribe((unreg: Report[]) => {
+      this.unreg = unreg;
+      console.log(this.unreg);
+    })
+
   }
 
-  //Tuk ID count
-  tukOne;
-  tukTwo;
-  tukThree;
-  tukFour;
-  tukFive;
-  tukSix;
-  tukSeven;
-  tukEight;
-  tukNine;
-  tukTen;
-  tukEleven;
-
-  //Total Count
-  scannedListLength;
-  userListLength;
-
-  //All API called arraylists
-  tukList: Tuk[];
-
-  scannedList: Scanned[];
-
-  userList: User[];
-  pausedList: Paused[];
-  notUserList: User[];
-  updateScanItem: Scanned[];
+  // --- ArrayList to store API CALLS --- //
+  friCount: Report[];
+  paxReg: Report[];
+  paxUnreg: Report[];
+  tukReg: Report[];
+  tukUnreg: Report[];
+  tukRegNT: Report[];
+  reg: Report[];
+  unreg: Report[];
 
   ngOnInit(): void {
 
-    this.apiService.readTuks().subscribe((tukList: Tuk[]) => {
-      this.tukList = tukList;
-      // console.log(this.tukList);
+    this.apiService.readFriday(this.today).subscribe((friCount: Report[]) => {
+      this.friCount = friCount;
+      // console.log(this.friCount);
     })
 
-    this.apiService.readRegistrants(this.today).subscribe((userList: User[]) => {
-      this.userList = userList;
-      this.userListLength = userList.length;
-      // console.log(this.userList);
+    this.apiService.readPaxRegistered(this.today).subscribe((paxReg: Report[]) => {
+      this.paxReg = paxReg;
+      // console.log(this.paxReg);
     })
 
-    this.apiService.readScanned(this.today).subscribe((scannedList: Scanned[]) => {
-      this.scannedList = scannedList;
-      this.scannedListLength = scannedList.length;
-      this.updateCount(this.scannedList);
-      // console.log(this.scannedList);
-
+    this.apiService.readPaxUnRegistered(this.today).subscribe((paxUnreg: Report[]) => {
+      this.paxUnreg = paxUnreg;
+      // console.log(this.paxUnreg);
     })
 
-    this.apiService.readPaused(this.today).subscribe((pausedList: Paused[]) => {
-      this.pausedList = pausedList;
-      // console.log(this.pausedList);
+    this.apiService.readTukRegistered(this.today).subscribe((tukReg: Report[]) => {
+      this.tukReg = tukReg;
+      // console.log(this.tukReg);
     })
 
-    this.apiService.readNotRegistered(this.today).subscribe((notUserList: User[]) => {
-      this.notUserList = notUserList;
-      // console.log(this.notUserList);
+    this.apiService.readTukUnregistered(this.today).subscribe((tukUnreg: Report[]) => {
+      this.tukUnreg = tukUnreg;
+      // console.log(this.tukUnreg);
     })
 
-  }
+    this.apiService.readTukRegisteredNT(this.today).subscribe((tukRegNT: Report[]) => {
+      this.tukRegNT = tukRegNT;
+      // console.log(this.tukRegNT);
+    })
 
-  updateCount(arr) {
+    this.apiService.readRegistered(this.today).subscribe((reg: Report[]) => {
+      this.reg = reg;
+      // console.log(this.reg);
+    })
 
-    // for (var i = 1; i <= 11; i++) {
-    //   var filtered_i = arr.filter(function (d) {
-    //     return d.tuk_id === "'" + i + "'";
-    //   });
-    //   this.tuk_i
-    //   this.tukOne = filteredOne.length;
-    // }
-
-    //Tuk One Count
-    var filteredOne = arr.filter(function (d) {
-      return d.tuk_id === "1";
-    });
-    this.tukOne = filteredOne.length;
-
-    //Tuk One Count
-    var filteredTwo = arr.filter(function (d) {
-      return d.tuk_id === "2";
-    });
-    this.tukTwo = filteredTwo.length;
-
-    //Tuk One Count
-    var filteredThree = arr.filter(function (d) {
-      return d.tuk_id === "3";
-    });
-    this.tukThree = filteredThree.length;
-
-    //Tuk One Count
-    var filteredFour = arr.filter(function (d) {
-      return d.tuk_id === "4";
-    });
-    this.tukFour = filteredFour.length;
-
-    //Tuk One Count
-    var filteredFive = arr.filter(function (d) {
-      return d.tuk_id === "5";
-    });
-    this.tukFive = filteredFive.length;
-
-    //Tuk One Count
-    var filteredSix = arr.filter(function (d) {
-      return d.tuk_id === "6";
-    });
-    this.tukSix = filteredSix.length;
-
-    //Tuk One Count
-    var filteredSeven = arr.filter(function (d) {
-      return d.tuk_id === "7";
-    });
-    this.tukSeven = filteredSeven.length;
-
-    //Tuk One Count
-    var filteredEight = arr.filter(function (d) {
-      return d.tuk_id === "8";
-    });
-    this.tukEight = filteredEight.length;
-
-    //Tuk One Count
-    var filteredNine = arr.filter(function (d) {
-      return d.tuk_id === "9";
-    });
-    this.tukNine = filteredNine.length;
-
-    //Tuk One Count
-    var filteredTen = arr.filter(function (d) {
-      return d.tuk_id === "10";
-    });
-    this.tukTen = filteredTen.length;
-
-    //Tuk One Count
-    var filteredEleven = arr.filter(function (d) {
-      return d.tuk_id === "11";
-    });
-    this.tukEleven = filteredEleven.length;
+    this.apiService.readUnregistered(this.today).subscribe((unreg: Report[]) => {
+      this.unreg = unreg;
+      console.log(this.unreg);
+    })
 
   }
 

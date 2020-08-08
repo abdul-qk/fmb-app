@@ -3,8 +3,8 @@
 /**
  * Returns the list of policies.
  */
-require 'database.php';
-require_once 'date.php';
+require '../api/database.php';
+require_once '../api/date.php';
 
 $sql_fri = "AND tiffinfreq <> 'F'";
 if (date("l", strtotime($dateformatted)) == "Friday") {
@@ -14,7 +14,7 @@ if (date("l", strtotime($dateformatted)) == "Friday") {
 $userlist = [];
 
 $sql = "SELECT packqty, count(packqty) as packqtyCount from tbl_registrations 
-        WHERE tiffinsts LIKE 'NOT TAKING'
+        WHERE tiffinsts LIKE 'TAKING'
         AND confirmed = 1
         AND debcode IN (SELECT debcode FROM tbl_scan WHERE DATE(scan_time) = '$dateformatted') $sql_fri
         Group by packqty";

@@ -5,6 +5,7 @@ import { User } from './user';
 import { Tuk } from './tuk';
 import { Scanned } from './scanned';
 import { Paused } from './paused';
+import { Report } from './report';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -16,6 +17,9 @@ export class ApiService {
   PHP_API_SERVER = "http://127.0.0.1:8080";
   constructor(private httpClient: HttpClient) { }
 
+  /*/--------------------------------------------------
+                ONLINE DASHBOARD API CALLS
+  --------------------------------------------------/*/
   readTuks(): Observable<Tuk[]> {
     return this.httpClient.get<Tuk[]>(`${this.PHP_API_SERVER}/api/read_tuks.php`);
   }
@@ -45,23 +49,61 @@ export class ApiService {
     });
   }
 
-  readPaxRegistered(date): Observable<User[]> {
-    return this.httpClient.get<User[]>(`${this.PHP_API_SERVER}/api/read_pax_reg.php`, {
+  /*/--------------------------------------------------
+              REPORTS DASHBOARD API CALLS
+  --------------------------------------------------/*/
+
+  readFriday(date): Observable<Report[]> {
+    return this.httpClient.get<Report[]>(`${this.PHP_API_SERVER}/reports/count_friday.php`, {
+      params: {curDate: date}
+    });
+  }
+  
+  readPaxRegistered(date): Observable<Report[]> {
+    return this.httpClient.get<Report[]>(`${this.PHP_API_SERVER}/reports/count_pax_reg.php`, {
       params: {curDate: date}
     });
   }
 
-  readPaxUnRegistered(date): Observable<User[]> {
-    return this.httpClient.get<User[]>(`${this.PHP_API_SERVER}/api/read_pax_unreg.php`, {
+  readPaxUnRegistered(date): Observable<Report[]> {
+    return this.httpClient.get<Report[]>(`${this.PHP_API_SERVER}/reports/count_pax_unreg.php`, {
       params: {curDate: date}
     });
   }
 
-  readPaxRegisteredNT(date): Observable<User[]> {
-    return this.httpClient.get<User[]>(`${this.PHP_API_SERVER}/api/read_pax_reg_nt.php`, {
+  readTukRegistered(date): Observable<Report[]> {
+    return this.httpClient.get<Report[]>(`${this.PHP_API_SERVER}/reports/count_reg_tuk.php`, {
       params: {curDate: date}
     });
   }
+
+  readTukRegisteredNT(date): Observable<Report[]> {
+    return this.httpClient.get<Report[]>(`${this.PHP_API_SERVER}/reports/count_regnt_tuk.php`, {
+      params: {curDate: date}
+    });
+  }
+
+  readTukUnregistered(date): Observable<Report[]> {
+    return this.httpClient.get<Report[]>(`${this.PHP_API_SERVER}/reports/count_unreg_tuk.php`, {
+      params: {curDate: date}
+    });
+  }
+
+  readRegistered(date): Observable<Report[]> {
+    return this.httpClient.get<Report[]>(`${this.PHP_API_SERVER}/reports/read_reg.php`, {
+      params: {curDate: date}
+    });
+  }
+
+  readUnregistered(date): Observable<Report[]> {
+    return this.httpClient.get<Report[]>(`${this.PHP_API_SERVER}/reports/read_unreg.php`, {
+      params: {curDate: date}
+    });
+  }
+
+  /*/--------------------------------------------------
+          ONLINE DASHBOARD UPDATE API CALLS 
+  --------------------------------------------------/*/
 
   updateScan(scanned) {
     // console.log(scanned);
