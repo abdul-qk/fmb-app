@@ -1,4 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 // import { BehaviorSubject } from 'rxjs';
 
 import { ApiService } from '../api.service';
@@ -41,6 +43,8 @@ export class DashboardComponent implements OnInit {
     private apiService: ApiService,
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
+    private cookieService: CookieService,
+    private router: Router,
   ) {
     this.checkoutForm = this.formBuilder.group({
       tuk_id: '',
@@ -184,46 +188,53 @@ export class DashboardComponent implements OnInit {
 
 
   ngOnInit(): void {
-    const that = this;
+    var cookie = this.cookieService.get('login_user');
+    console.log('Cookie Value', cookie);
 
-    this.sabeel = {
-      debcode: "",
-    };
+    if (cookie != "") {
+      const that = this;
 
-    this.apiService.readTuks().subscribe((tukList: Tuk[]) => {
-      this.tukList = tukList;
-      // console.log(this.tukList);
-    })
+      this.sabeel = {
+        debcode: "",
+      };
 
-    this.apiService.readRegistrants(this.today).subscribe((userList: User[]) => {
-      this.userList = userList;
-      // console.log(this.userList);
-    })
+      this.apiService.readTuks().subscribe((tukList: Tuk[]) => {
+        this.tukList = tukList;
+        // console.log(this.tukList);
+      })
 
-    this.apiService.readScanned(this.today).subscribe((scannedList: Scanned[]) => {
-      this.scannedList = scannedList;
-      console.log(this.scannedList);
-    })
+      this.apiService.readRegistrants(this.today).subscribe((userList: User[]) => {
+        this.userList = userList;
+        // console.log(this.userList);
+      })
 
-    this.apiService.readPaused(this.today).subscribe((pausedList: Paused[]) => {
-      this.pausedList = pausedList;
-      // console.log(this.pausedList);
-    })
+      this.apiService.readScanned(this.today).subscribe((scannedList: Scanned[]) => {
+        this.scannedList = scannedList;
+        console.log(this.scannedList);
+      })
 
-    this.apiService.readNotRegistered(this.today).subscribe((notUserList: User[]) => {
-      this.notUserList = notUserList;
-      // console.log(this.notUserList);
-    })
+      this.apiService.readPaused(this.today).subscribe((pausedList: Paused[]) => {
+        this.pausedList = pausedList;
+        // console.log(this.pausedList);
+      })
 
-    this.dtOptions = {
-      // Declare the use of the extension in the dom parameter
-      dom: 'Bfrtip',
-      // Configure the buttons
-      buttons: [
-        'print',
-        'excel',
-      ]
-    };
+      this.apiService.readNotRegistered(this.today).subscribe((notUserList: User[]) => {
+        this.notUserList = notUserList;
+        // console.log(this.notUserList);
+      })
+
+      this.dtOptions = {
+        // Declare the use of the extension in the dom parameter
+        dom: 'Bfrtip',
+        // Configure the buttons
+        buttons: [
+          'print',
+          'excel',
+        ]
+      };
+    } else {
+      this.router.navigate(['']);
+    }
 
   }
 

@@ -37,6 +37,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { ReportsComponent } from './reports/reports.component';
 import { TuksComponent } from './tuks/tuks.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { TuksComponent } from './tuks/tuks.component';
     FooterComponent,
     ReportsComponent,
     TuksComponent,
+    LoginComponent,
   ],
   entryComponents: [
     NotListedDialogComponent,

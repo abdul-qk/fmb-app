@@ -6,6 +6,8 @@ import { ApiService } from '../api.service';
 
 import { FormControl } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reports',
@@ -14,7 +16,9 @@ import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 })
 export class ReportsComponent implements OnInit {
 
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService,
+    private router: Router,
+    private cookieService: CookieService) { }
 
   today = Math.floor(new Date().getTime() / 1000.0)
   dateTod = new Date().toISOString()
@@ -130,52 +134,60 @@ export class ReportsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.apiService.readFriday(this.today).subscribe((friCount: Report[]) => {
-      this.friCount = friCount;
-      // console.log(this.friCount);
-    })
+    var cookie = this.cookieService.get('login_user');
+    console.log('Cookie Value', cookie);
 
-    this.apiService.readPaxRegistered(this.today).subscribe((paxReg: Report[]) => {
-      this.paxReg = paxReg;
-      // console.log(this.paxReg);
-    })
+    if (cookie != "") {
 
-    this.apiService.readPaxUnRegistered(this.today).subscribe((paxUnreg: Report[]) => {
-      this.paxUnreg = paxUnreg;
-      // console.log(this.paxUnreg);
-    })
+      this.apiService.readFriday(this.today).subscribe((friCount: Report[]) => {
+        this.friCount = friCount;
+        // console.log(this.friCount);
+      })
 
-    this.apiService.readTukRegistered(this.today).subscribe((tukReg: Report[]) => {
-      this.tukReg = tukReg;
-      console.log(this.tukReg);
-    })
+      this.apiService.readPaxRegistered(this.today).subscribe((paxReg: Report[]) => {
+        this.paxReg = paxReg;
+        // console.log(this.paxReg);
+      })
 
-    this.apiService.readTukUnregistered(this.today).subscribe((tukUnreg: Report[]) => {
-      this.tukUnreg = tukUnreg;
-      // console.log(this.tukUnreg);
-    })
+      this.apiService.readPaxUnRegistered(this.today).subscribe((paxUnreg: Report[]) => {
+        this.paxUnreg = paxUnreg;
+        // console.log(this.paxUnreg);
+      })
 
-    this.apiService.readTukRegisteredNT(this.today).subscribe((tukRegNT: Report[]) => {
-      this.tukRegNT = tukRegNT;
-      // console.log(this.tukRegNT);
-    })
+      this.apiService.readTukRegistered(this.today).subscribe((tukReg: Report[]) => {
+        this.tukReg = tukReg;
+        console.log(this.tukReg);
+      })
 
-    this.apiService.readRegistered(this.today).subscribe((reg: Report[]) => {
-      this.reg = reg;
-      // console.log(this.reg);
-    })
+      this.apiService.readTukUnregistered(this.today).subscribe((tukUnreg: Report[]) => {
+        this.tukUnreg = tukUnreg;
+        // console.log(this.tukUnreg);
+      })
 
-    this.apiService.readUnregistered(this.today).subscribe((unreg: Report[]) => {
-      this.unreg = unreg;
-      console.log(this.unreg);
-    })
+      this.apiService.readTukRegisteredNT(this.today).subscribe((tukRegNT: Report[]) => {
+        this.tukRegNT = tukRegNT;
+        // console.log(this.tukRegNT);
+      })
 
-    // COUNT TOTALS //
-    var tukRegTotal
+      this.apiService.readRegistered(this.today).subscribe((reg: Report[]) => {
+        this.reg = reg;
+        // console.log(this.reg);
+      })
 
-    for (let i = 0; i < this.tukReg.length; i++) {
-      var add = this.tukReg[i].count
-      tukRegTotal += add
+      this.apiService.readUnregistered(this.today).subscribe((unreg: Report[]) => {
+        this.unreg = unreg;
+        console.log(this.unreg);
+      })
+
+      // COUNT TOTALS //
+      var tukRegTotal
+
+      for (let i = 0; i < this.tukReg.length; i++) {
+        var add = this.tukReg[i].count
+        tukRegTotal += add
+      }
+    } else {
+      this.router.navigate(['/dashboard']);
     }
 
   }

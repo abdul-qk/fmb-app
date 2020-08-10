@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Tuk } from '../tuk';
-import { Scanned } from '../scanned';
-import { User } from '../user';
-import { Paused } from '../paused';
 import { ApiService } from '../api.service';
 import { FormControl, NgForm, FormBuilder } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-tuks',
@@ -16,7 +15,11 @@ export class TuksComponent implements OnInit {
 
   tukForm;
 
-  constructor(private apiService: ApiService, private formBuilder: FormBuilder) {
+  constructor(private apiService: ApiService,
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private cookieService: CookieService,
+  ) {
     this.tukForm = this.formBuilder.group({
       tuk_name: '',
       address: '',
@@ -43,10 +46,18 @@ export class TuksComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.apiService.readTuks().subscribe((tukList: Tuk[]) => {
-      this.tukList = tukList;
-      console.log(this.tukList);
-    })
+    var cookie = this.cookieService.get('login_user');
+    console.log('Cookie Value', cookie);
+
+    if (cookie != "") {
+
+      this.apiService.readTuks().subscribe((tukList: Tuk[]) => {
+        this.tukList = tukList;
+        console.log(this.tukList);
+      })
+    } else {
+      this.router.navigate(['/dashboard']);
+    }
 
   }
 

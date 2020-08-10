@@ -126,4 +126,11 @@ export class ApiService {
     return this.httpClient.get(`${this.PHP_API_SERVER}/api/delete_tuk.php?tuk_id=` + id);
   }
 
+   /*/--------------------------------------------------
+          LOGIN API CALL 
+  --------------------------------------------------/*/
+  login(user) {
+    return this.httpClient.get(`${this.PHP_API_SERVER}/api/login.php?username=` + user.username + `&pass=` + user.pass);
+  }
+
 }
