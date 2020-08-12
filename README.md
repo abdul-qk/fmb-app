@@ -8,9 +8,11 @@
 ### How do I get set up? ###
 
 * Copy the project on the local machine
-* Run "ng serve -o" and "php -S 127.0.0.1:8080 -t .\backend\"
+* Run "ng serve -o" 
+* Then run "php -S 127.0.0.1:8080 -t .\backend\" in a different console
+* Also run the local server to connect to mysql db
 
-## Dependencies ##
+### Dependencies ###
 * Angular 
 * NPM
 * Local Server (WAMP or XAMP)
