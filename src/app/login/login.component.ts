@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
 
   error = "";
   userList: Login[];
-  userListOne: Login = { user_name: null, user_id: null, user_fullname: null, user_power: null };
+  userListOne: Login = { user_name: null, user_id: null, user_fullname: null, user_power: null, error: null };
 
   ngOnInit(): void {
   }
@@ -37,20 +37,20 @@ export class LoginComponent implements OnInit {
 
     this.apiService.login(formValue).subscribe((userList: Login[]) => {
       this.userList = userList;
-      console.log(this.userList.user_power);
+      console.log(this.userList['user_power']);
 
-      var loginCookie = this.userList.user_id;
+      var loginCookie = this.userList['user_id'];
 
-      if (this.userList.user_power >= 4 && this.userList.user_id != null) {
+      if (this.userList['user_power'] == 4 && this.userList['user_id'] != null) {
 
         this.router.navigate(['/dashboard']);
-        this.cookieService.set('login_user', loginCookie);
+        this.cookieService.set('login_user', loginCookie, 0.25);
 
-      } else if (this.userList.user_id == null) {
+      } else if (this.userList['user_id'] == null) {
 
         this.error = "User not found. Try again!"
 
-      } else if (this.userList.user_power < 4) {
+      } else if (this.userList['user_power'] != 4) {
 
         this.error = "You don't have access to this module! Please contact admin."
 

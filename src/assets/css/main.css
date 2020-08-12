@@ -83,7 +83,7 @@ iframe {
 
 .container-login100 {
   width: 100%;  
-  min-height: 100vh;
+  min-height: calc(100vh - 64px);
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -102,7 +102,6 @@ iframe {
 
 .wrap-login100 {
   width: 390px;
-  background: #fff;
   border-radius: 10px;
   position: relative;
 }
@@ -134,7 +133,7 @@ iframe {
 .wrap-input100 {
   width: 100%;
   position: relative;
-  background-color: #e6e6e6;
+  background-color: #fff;
   border: 1px solid transparent;
   border-radius: 3px;
 }

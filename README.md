@@ -1,29 +1,20 @@
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
-
 ### What is this repository for? ###
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+* This is a community based project for to scan and store tiffin details that are being handed out on a daily basis. The system is capable of handling mysql database using REST API and Angular as the front-end. There are reports generated and a login section so that only relevant authority has access to it.
+* Version 1.5
 
 ### How do I get set up? ###
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+* Copy the project on the local machine
+* Run "ng serve -o" and "php -S 127.0.0.1:8080 -t .\backend\"
 
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
+## Dependencies ##
+* Angular 
+* NPM
+* Local Server (WAMP or XAMP)
 
 ### Who do I talk to? ###
 
-* Repo owner or admin
-* Other community or team contact
+* Abdul Qadir Kaizar - Repo Owner

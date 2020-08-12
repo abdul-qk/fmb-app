@@ -11,7 +11,11 @@
 <div class="limiter">
   <div class="container-login100">
     <div class="wrap-login100 p-t-50 p-b-90">
-      <form class="login100-form validate-form flex-sb flex-w" [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
+      <div class="logo">
+        <img class="text-center" src="../../assets/img/logo.png" alt="" width="200px">
+      </div>
+      <form class="login100-form validate-form flex-sb flex-w" [formGroup]="loginForm"
+        (ngSubmit)="onSubmit(loginForm.value)">
         <span class="login100-form-title p-b-51">
           Login
         </span>

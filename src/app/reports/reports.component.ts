@@ -187,9 +187,14 @@ export class ReportsComponent implements OnInit {
         tukRegTotal += add
       }
     } else {
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['']);
     }
 
+  }
+
+  logout(){
+    this.cookieService.deleteAll();
+    this.router.navigate(['']);
   }
 
 }

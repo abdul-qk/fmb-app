@@ -3,4 +3,5 @@ export class Login{
     user_id: number;
     user_fullname: string
     user_power: number
+    error: string
 }

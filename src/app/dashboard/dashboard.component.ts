@@ -238,6 +238,11 @@ export class DashboardComponent implements OnInit {
 
   }
 
+  logout(){
+    this.cookieService.deleteAll();
+    this.router.navigate(['']);
+  }
+
   updateCount(tuk_id) {
     var arr = this.userList;
     var arr2 = this.scannedList;

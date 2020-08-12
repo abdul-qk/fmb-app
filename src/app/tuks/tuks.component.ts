@@ -56,7 +56,7 @@ export class TuksComponent implements OnInit {
         console.log(this.tukList);
       })
     } else {
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['']);
     }
 
   }
@@ -84,6 +84,11 @@ export class TuksComponent implements OnInit {
       console.log(this.tukList);
     })
 
+  }
+
+  logout(){
+    this.cookieService.deleteAll();
+    this.router.navigate(['']);
   }
 
 }
